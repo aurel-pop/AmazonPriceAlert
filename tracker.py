@@ -31,7 +31,7 @@ def tracker(random_header):
         # Check if the "search" term appears in the text of the first "span" tag
         if search.lower() in (i.text).lower():
             # If it does, print the item name and price
-            print("{} - {} €".format(i.text,j.text))
+            print("- {} - {} €".format(i.text,j.text))
 
             # Store the item name and price in a dictionary called "store"
             store[str(i.text)]=j.text
@@ -42,12 +42,14 @@ def tracker(random_header):
                     # If it does, compare the current price to the previous price
                     if j.text<b:
                         # If the current price is lower, show a toast notification using the "toaster" library
-                        toaster.show_toast("Amazon Deal",i.text+" || Price"+j.text)
+                        toaster.show_toast("Amazon Deal! ",i.text+" - "+j.text+" €",duration=15)
 
 
 while True:
     user = UserAgent()
     randomHeader = {'User-Agent':str(user.random)}
-    print('Tracking: ',search, '- at: ',time.asctime(time.localtime(time.time())))
+    print('Tracking: ',search, '- ', time.ctime(time.time()))
+    print('-------------------------------------------------')
     tracker(randomHeader)
-    time.sleep(60*5)
+    print(' ')
+    time.sleep(60*30) # 30 minutes
