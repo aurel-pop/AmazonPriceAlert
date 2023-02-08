@@ -26,15 +26,12 @@ def tracker(random_header):
     # Find the first "span" tag with the specified class attribute
     tag_2 = soup('span',{'class':'a-price-whole'})
 
-    print("Search results for: ",search)
-
     # Use "zip" to iterate over both "tag" and "tag_2" in parallel
     for i,j in zip(tag,tag_2):
-        print(i.text,j.text)
         # Check if the "search" term appears in the text of the first "span" tag
         if search.lower() in (i.text).lower():
             # If it does, print the item name and price
-            print("{} || price: {} €".format(i.text,j.text))
+            print("{} - {} €".format(i.text,j.text))
 
             # Store the item name and price in a dictionary called "store"
             store[str(i.text)]=j.text
@@ -51,6 +48,6 @@ def tracker(random_header):
 while True:
     user = UserAgent()
     randomHeader = {'User-Agent':str(user.random)}
-    print('Tracking.....',time.asctime(time.localtime(time.time())))
+    print('Tracking: ',search, '- at: ',time.asctime(time.localtime(time.time())))
     tracker(randomHeader)
     time.sleep(60*5)
